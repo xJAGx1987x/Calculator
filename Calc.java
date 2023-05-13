@@ -534,24 +534,41 @@ public class Calc extends javax.swing.JFrame {
     }
 
     private void negateButtonActionPerformed(java.awt.event.ActionEvent evt) {
-     double d = Double.parseDouble(expression) ;
-     d *= -1 ;
-     expression = Double.toString(d) ;
-     displayField.setText(expression) ;
+        double d = Double.parseDouble(expression) ;
+        d *= -1 ;
+        expression = Double.toString(d) ;
+        displayField.setText(expression) ;
     }
 
     private void sqrtButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
         gamma = Double.parseDouble(expression);
-        equation += sqrtButton.getText() ;
-        equation += expression ;
-        equationField.setText(equation) ;
-        equation = "" ;
-        delta = CalcFunctions.sqrtFunc(gamma) ;
-        expression = Double.toString(delta);
-        displayField.setText(expression) ;
-        gamma = delta ;
-        delta = 0 ;
+        equation = sqrtButton.getText();
+
+        if(gamma >= 0 ) {
+            equation += expression;
+            equationField.setText(equation);
+            equation = "";
+            delta = CalcFunctions.sqrtFunc(gamma);
+            expression = "±" ;
+            expression += Double.toString(delta);
+            displayField.setText(expression);
+            expression = Double.toString(delta) ; 
+            gamma = delta;
+            delta = 0;
+        } else {
+            gamma *= -1 ;
+            equation += expression;
+            equationField.setText(equation);
+            equation = "";
+            delta = CalcFunctions.sqrtFunc(gamma);
+            expression = Double.toString(delta);
+            expression += "i" ;
+            displayField.setText(expression);
+            expression = Double.toString(delta) ;
+            gamma = delta;
+            delta = 0;
+
+        }
 
     }
 
